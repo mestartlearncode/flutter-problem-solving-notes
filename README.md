@@ -9,16 +9,20 @@ if we call `async function` directly, we will get error message :
 >**await expression can only be used in an asynchronous function**
 
 **Solution:**
-`String pickRadioValue;
-  @override
-    void initState() {
-      setState(() {
-        ads.getPreferredLanguage().then((result){
+
+use `then()` if you want to execute `async function` in init state :
+
+    String pickRadioValue;
+      @override
+        void initState() {
           setState(() {
-            print (":: debug result >>>"+result.toString());
-            pickRadioValue = result;
+            ads.getPreferredLanguage().then((result){
+              setState(() {
+                print (":: debug result >>>"+result.toString());
+                pickRadioValue = result;
+              });
+            });
           });
-        });
-      });
-      super.initState();
-}`
+          super.initState();
+    }
+
